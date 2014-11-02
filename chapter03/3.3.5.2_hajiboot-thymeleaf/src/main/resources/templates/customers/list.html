@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>顧客一覧</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="col-sm-12">
+    <form th:action="@{/customers/create}" th:object="${customerForm}" class="form-horizontal" method="post">
+        <fieldset>
+            <legend>顧客情報作成</legend>
+            <div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error has-feedback'">
+                <label for="lastName" class="col-sm-2 control-label">姓</label>
+
+                <div class="col-sm-10">
+                    <input type="text" id="lastName" name="lastName" th:field="*{lastName}"
+                           class="form-control" value="山田"/>
+                        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                              class="help-block">error!</span>
+                </div>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('firstName')}? 'has-error has-feedback'">
+                <label for="firstName" class="col-sm-2 control-label">名</label>
+
+                <div class="col-sm-10">
+                    <input type="text" id="firstName" name="firstName" th:field="*{firstName}"
+                           class="form-control" value="太郎"/>
+                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                              class="help-block">error!</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">作成</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <hr/>
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>ID</th>
+            <th>姓</th>
+            <th>名</th>
+            <th colspan="2">編集</th>
+        </tr>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.id}">100</td>
+            <td th:text="${customer.lastName}">山田</td>
+            <td th:text="${customer.firstName}">太郎</td>
+            <td>
+                <form th:action="@{/customers/edit}" method="get">
+                    <input class="btn btn-default" type="submit" name="form" value="編集"/>
+                    <input type="hidden" name="id" th:value="${customer.id}"/>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/customers/delete}" method="post">
+                    <input class="btn btn-danger" type="submit" value="削除"/>
+                    <input type="hidden" name="id" th:value="${customer.id}"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
