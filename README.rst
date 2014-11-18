@@ -21,7 +21,8 @@
    * - P.21 中央よりやや下
      - \ ``<version>1.2.0.RELEASE</version>``\ 
      - \ ``<version>1.2.1.RELEASE</version>``\ 
-   * - P.47 ※印のコメント
+     - 2014-11-18
+   * - P.47 米印のコメント
      - 「autoFigure」の仕組みについては
      - 「autoconfigure」の仕組みについては
      - 2014-11-18
