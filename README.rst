@@ -17,14 +17,26 @@
    * - 場所
      - 誤
      - 正
+     - 補足
    * - P.21 中央よりやや下
      - \ ``<version>1.2.0.RELEASE</version>``\ 
      - \ ``<version>1.2.1.RELEASE</version>``\ 
+     - 
    * - P.54 \ ``realDataSource``\ を定義する箇所
      - \ ``@Bean``\ 
      - \ ``@Bean(destroyMethod = "close")``\ 
+     - 
    * - P.58 項番(1)
      - (b) 「エラーが発生した場合」は 
-     - (b) 「\ **実行時例外が**\ 発生した場合」は 
+     - (b) 「\ **実行時例外が**\ 発生した場合」は
+     - チェック例外の場合はロールバックされません
+   * - P.68 中央のAppクラスの説明
+     - \ ``customerRepository.finadAllOrderById()``\ 
+     - \ ``customerRepository.finadAllOrderByName()``\ 
+     - 
+   * - P.69 ノート
+     - \ ``List<Customer> finadAllOrderById()``\ 
+     - \ ``List<Customer> finadAllOrderByName()``\ 
+     - 
 
 
