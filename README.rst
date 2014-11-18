@@ -29,7 +29,7 @@
    * - P.58 項番(1)
      - (b) 「エラーが発生した場合」は 
      - (b) 「\ **実行時例外が**\ 発生した場合」は
-     - チェック例外の場合はロールバックされません
+     - *1
    * - P.68 中央のAppクラスの説明
      - \ ``customerRepository.finadAllOrderById()``\ 
      - \ ``customerRepository.finadAllOrderByName()``\ 
@@ -39,4 +39,4 @@
      - \ ``List<Customer> finadAllOrderByName()``\ 
      - 
 
-
+*1 ... チェック例外の場合はロールバックされません
