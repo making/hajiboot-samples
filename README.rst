@@ -35,12 +35,12 @@
      - (b) 「\ **実行時例外が**\ 発生した場合」は (*1)
      - 2014-11-18
    * - P.68 中央のAppクラスの説明
-     - \ ``customerRepository.finadAllOrderById()``\ 
-     - \ ``customerRepository.finadAllOrderByName()``\ 
+     - \ ``customerRepository.findAllOrderById()``\ 
+     - \ ``customerRepository.findAllOrderByName()``\ 
      - 2014-11-18
    * - P.69 ノート
-     - \ ``List<Customer> finadAllOrderById()``\ 
-     - \ ``List<Customer> finadAllOrderByName()``\ 
+     - \ ``List<Customer> findAllOrderById()``\ 
+     - \ ``List<Customer> findAllOrderByName()``\ 
      - 2014-11-18
    * - P.117 「このように～」の文章 
      - 「このように～」の文章がノートの外側
