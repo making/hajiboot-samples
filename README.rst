@@ -18,6 +18,10 @@
      - 誤
      - 正
      - 訂正日
+   * - P.19 コマンドプロンプト内 (2箇所)
+     - \ ``$ java -jar target\\hajiboot-1.0.0-SNAPSHOT.jar``\ 
+     - \ ``$ java -jar target/hajiboot-1.0.0-SNAPSHOT.jar``\ 
+     - 2014-11-20
    * - P.21 中央よりやや下
      - \ ``<version>1.2.0.RELEASE</version>``\ 
      - \ ``<version>1.2.1.RELEASE</version>``\ 
