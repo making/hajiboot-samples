@@ -54,6 +54,10 @@
      - アプリケーション起動時に「Java API」を自動で行う
      - アプリケーション起動時に「Flyway」の「Java API」を自動で実行する
      - 2014-11-18
+   * - P.121 下
+     - 「3.5.1」 「application.yml」の変更
+     - 「3.5.1」 「User」の「エンティティ」と「リポジトリ」作成
+     - 2014-11-18
    * - P.131 loginForm.html (1)付近
      - Invalid username and password.
      - ユーザー名またはパスワードが正しくありません。
