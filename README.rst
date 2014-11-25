@@ -30,6 +30,10 @@
      - 「autoFigure」の仕組みについては
      - 「autoconfigure」の仕組みについては
      - 2014-11-18
+   * - P.54 「Log4JDBC」用の「DataSource」の定義
+     - これまでは「Spring Boot」の「@EnableAutoConfiguration」の効果で、「DateSource」が
+     - これまでは「Spring Boot」の「@EnableAutoConfiguration」の効果で、「Dat\ **a**\ Source」が
+     - 2014-11-25
    * - P.54 \ ``realDataSource``\ を定義する箇所
      - \ ``@Bean``\ 
      - \ ``@Bean(destroyMethod = "close")``\ 
