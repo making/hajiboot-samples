@@ -26,6 +26,10 @@
      - \ ``<version>1.2.0.RELEASE</version>``\ 
      - \ ``<version>1.2.1.RELEASE</version>``\ 
      - 2014-11-18
+   * - P.30 プログラム解説 (2)
+     - 「DI コンテナ」に管理させたい「Bean」を生成するメソッドに、「@Configuration」
+     - 「DI コンテナ」に管理させたい「Bean」を生成するメソッドに、「@Bean」
+     - 2014-11-26
    * - P.47 米印のコメント
      - 「autoFigure」の仕組みについては
      - 「autoconfigure」の仕組みについては
