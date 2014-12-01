@@ -70,7 +70,7 @@
      - 【コマンド・プロンプト】追加されたライブラリの確認
      - 【コマンド・プロンプト】簡易顧客管理システムの処理一覧
      - 2014-11-26
-   * - P.94.95 ファイルパス(3箇所)
+   * - P.94,95 ファイルパス(3箇所)
      - src/main/resources/customers/list.html
      - src/main/resources/templates/customers/list.html
      - 2014-12-01
@@ -94,6 +94,10 @@
      - Invalid username and password.
      - ユーザー名またはパスワードが正しくありません。
      - 2014-11-18
+   * - P.133 ファイルパス(2箇所)
+     - src/main/resources/V3_add_user.sql
+     - src/main/resources/db/migration/V3_add_user.sql
+     - 2014-12-01
    * - P.155 
      - 「Unitコード」
      - 「JUnitコード」
