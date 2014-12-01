@@ -70,6 +70,10 @@
      - 【コマンド・プロンプト】追加されたライブラリの確認
      - 【コマンド・プロンプト】簡易顧客管理システムの処理一覧
      - 2014-11-26
+   * - P.94.95 ファイルパス(3箇所)
+     - src/main/resources/customers/list.html
+     - src/main/resources/templates/customers/list.html
+     - 2014-12-01
    * - P.108 3.3.4
      - customers/delete&id={id}
      - customers/delete?id={id}
