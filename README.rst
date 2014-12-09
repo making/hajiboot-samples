@@ -108,3 +108,29 @@
      - 2014-11-18
 
 \*1 ... チェック例外の場合はロールバックされません(\ **重要**\ )
+
+
+FAQ
+================================================================================
+
+
+ThymeleafはXHTMLじゃないと使えないのか？
+--------------------------------------------------------------------------------
+
+NekoHTMLを使うことで、XHTMLではないHTML5(Legacy HTML5と呼ばれています)を扱えます。
+
+pom.xmlに以下の依存関係を追加して、
+
+.. code-block:: xml
+
+   <dependency>
+       <groupId>net.sourceforge.nekohtml</groupId>
+       <artifactId>nekohtml</artifactId>
+       <version>1.9.21</version>
+   </dependency>
+
+application.ymlに以下の設定を行ってください。
+
+.. code-block:: yaml
+
+   spring.thymeleaf.mode: LEGACYHTML5
