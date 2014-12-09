@@ -113,7 +113,6 @@
 FAQ
 ================================================================================
 
-
 ThymeleafはXHTMLじゃないと使えないのか？
 --------------------------------------------------------------------------------
 
@@ -134,3 +133,89 @@ application.ymlに以下の設定を行ってください。
 .. code-block:: yaml
 
    spring.thymeleaf.mode: LEGACYHTML5
+
+org.h2.jdbc.JdbcSQLException: 機能はサポートされていません: "isWrapperFor"が出力される
+--------------------------------------------------------------------------------------------
+
+Spring Boot1.1ではH2(1.3.176) + Spring Data JPA (Hibernate) + Log4JDBCの組み合わせで以下のようなエラーログが出力されます。
+
+.. code-block:: bash
+
+  2014-12-09 13:55:49.711 ERROR 6512 --- [o-auto-1-exec-5] jdbc.sqltiming                           : 15. PreparedStatement.isWrapperFor(java.sql.CallableStatement)
+
+  org.h2.jdbc.JdbcSQLException: 機能はサポートされていません: "isWrapperFor"
+  Feature not supported: "isWrapperFor" [50100-176]
+          at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+          at org.h2.message.DbException.get(DbException.java:178)
+          at org.h2.message.DbException.get(DbException.java:154)
+          at org.h2.message.DbException.getUnsupportedException(DbException.java:215)
+          at org.h2.message.TraceObject.unsupported(TraceObject.java:395)
+          at org.h2.jdbc.JdbcStatement.isWrapperFor(JdbcStatement.java:1076)
+          at net.sf.log4jdbc.PreparedStatementSpy.isWrapperFor(PreparedStatementSpy.java:1142)
+          at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.isTypeOf(ResultSetReturnImpl.java:99)
+          at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.extract(ResultSetReturnImpl.java:70)
+          at org.hibernate.loader.Loader.getResultSet(Loader.java:2065)
+          at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:1862)
+          at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:1838)
+          at org.hibernate.loader.Loader.doQuery(Loader.java:909)
+          at org.hibernate.loader.Loader.doQueryAndInitializeNonLazyCollections(Loader.java:354)
+          at org.hibernate.loader.Loader.doList(Loader.java:2553)
+          at org.hibernate.loader.Loader.doList(Loader.java:2539)
+          at org.hibernate.loader.Loader.listIgnoreQueryCache(Loader.java:2369)
+          at org.hibernate.loader.Loader.list(Loader.java:2364)
+          at org.hibernate.loader.hql.QueryLoader.list(QueryLoader.java:496)
+          at org.hibernate.hql.internal.ast.QueryTranslatorImpl.list(QueryTranslatorImpl.java:387)
+          at org.hibernate.engine.query.spi.HQLQueryPlan.performList(HQLQueryPlan.java:231)
+          at org.hibernate.internal.SessionImpl.list(SessionImpl.java:1264)
+          at org.hibernate.internal.QueryImpl.list(QueryImpl.java:103)
+          at org.hibernate.jpa.internal.QueryImpl.list(QueryImpl.java:573)
+          at org.hibernate.jpa.internal.QueryImpl.getResultList(QueryImpl.java:449)
+          at org.springframework.data.jpa.repository.query.JpaQueryExecution$PagedExecution.doExecute(JpaQueryExecution.java:153)
+          at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:59)
+          at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:97)
+          at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:88)
+          at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.doInvoke(RepositoryFactorySupport.java:384)
+          at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.invoke(RepositoryFactorySupport.java:344)
+          at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+          at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:98)
+          (以下略)
+
+以下のためです。
+
+* HibernateがJDBC 4.0で追加された\ ``isWrapperFor``\ を呼んでいる
+* H2(1.3.176)が`isWrapperFor`を実装していない
+* Log4JBDCがJDBCのエラーをログ出力する
+* (Hibernateが\ ``isWrapperFor``\ がサポートされていないという例外を握りつぶす)
+
+普段から起こっている事象ですが、Log4JBDCによって顕在化してしまっています。
+
+無視しても問題ないのですが、精神衛生上よろしくないので修正したいという場合は、H2のバージョンをあげて\ ``isWrapperFor``\ がサポートされているものを使えばよいです。
+
+H2のバージョンはspring-boot-starter-parentで管理されており、上書きするにはプロジェクトのpom.xmlにバージョンプロパティを指定すればよいです。
+
+pom.xmlを以下のように修正してください。
+
+
+.. code-block:: xml
+
+    <properties>
+        <java.version>1.8</java.version>
+        <h2.version2>1.4.182</h2.version2><!-- ここ追加 -->
+    </properties>
+
+ちなみにSpring Boot 1.2では始めからH2 1.4.182が使われるようになっています。
+
+なお、このバージョンのH2を使用すると、Windows上で\ ``jdbc:h2:file:/tmp/testdb``\ というURLの指定が出来ず、\ ``jdbc:h2:file:c:/tmp/testdb``\ というようにドライブレターを付ける必要があります。
+
+この挙動が嫌な場合(\ ``jdbc:h2:file:/tmp/testdb``\ のまま使いたい場合)、実行時に\ ``-Dh2.implicitRelativePath=true``\ を付けてください。毎回このプロパティを指定するのが面倒な場合は、\ ``main``\ メソッドで以下のように実装してください
+
+.. code-block:: java
+
+  public static void main(String[] args) {
+      if (System.getProperty("h2.implicitRelativePath") == null) {
+          // keep compatibility with H2 1.3
+          // prevent http://www.h2database.com/javadoc/org/h2/api/ErrorCode.html#c90011
+          System.setProperty("h2.implicitRelativePath", "true");
+      }
+      SpringApplication.run(App.class, args);
+  }
