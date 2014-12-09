@@ -219,3 +219,66 @@ pom.xmlを以下のように修正してください。
       }
       SpringApplication.run(App.class, args);
   }
+
+
+org.postgresql.util.PSQLException: 方法 org.postgresql.jdbc4.Jdbc4Connection.createClob() はまだ装備されていません。が出力される
+-----------------------------------------------------------------------------------------------------------------------------------
+
+H2同様にPostgreSQL + Hibernateでも同様のエラーログが出力されます。
+
+.. code-block:: bash
+
+    2014-12-09 20:41:13.753  INFO 5484 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+    2014-12-09 20:41:13.783 ERROR 5484 --- [           main] jdbc.sqltiming                           : 1. Connection.createClob()
+
+    org.postgresql.util.PSQLException: 方法 org.postgresql.jdbc4.Jdbc4Connection.createClob() はまだ装備されていません。
+            at org.postgresql.Driver.notImplemented(Driver.java:753)
+            at org.postgresql.jdbc4.AbstractJdbc4Connection.createClob(AbstractJdbc4Connection.java:41)
+            at org.postgresql.jdbc4.Jdbc4Connection.createClob(Jdbc4Connection.java:21)
+            at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+            at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+            at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+            at java.lang.reflect.Method.invoke(Method.java:483)
+            at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1270)
+            at org.apache.tomcat.jdbc.pool.ProxyConnection.invoke(ProxyConnection.java:126)
+            at org.apache.tomcat.jdbc.pool.JdbcInterceptor.invoke(JdbcInterceptor.java:109)
+            at org.apache.tomcat.jdbc.pool.DisposableConnectionFacade.invoke(DisposableConnectionFacade.java:80)
+            at com.sun.proxy.$Proxy52.createClob(Unknown Source)
+            at net.sf.log4jdbc.ConnectionSpy.createClob(ConnectionSpy.java:496)
+            at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+            at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+            at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+            at java.lang.reflect.Method.invoke(Method.java:483)
+            at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1270)
+            at org.hibernate.engine.jdbc.internal.LobCreatorBuilder.useContextualLobCreation(LobCreatorBuilder.java:112)
+            at org.hibernate.engine.jdbc.internal.LobCreatorBuilder.<init>(LobCreatorBuilder.java:63)
+            at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:192)
+            (略)
+            
+    2014-12-09 20:41:13.791  INFO 5484 --- [           main] o.h.e.jdbc.internal.LobCreatorBuilder    : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+
+これも実際は問題ないのですが、Log4JDBCによってエラーが見えてしまっています。
+
+最新の9.3-1102-jdbc41で試してもまだ実装されていませんでした。
+
+.. code-block:: xml
+
+    <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>9.3-1102-jdbc41</version>
+    </dependency>
+
+.. code-block:: bash
+
+    2014-12-09 20:48:53.675 ERROR 7484 --- [           main] jdbc.sqltiming                           : 1. Connection.createClob()
+
+    java.sql.SQLFeatureNotSupportedException: org.postgresql.jdbc4.Jdbc4Connection.createClob() メソッドはまだ実装されていません。
+            at org.postgresql.Driver.notImplemented(Driver.java:729)
+            at org.postgresql.jdbc4.AbstractJdbc4Connection.createClob(AbstractJdbc4Connection.java:51)
+            at org.postgresql.jdbc4.Jdbc4Connection.createClob(Jdbc4Connection.java:21)
+            at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+
+
+ただ、書籍で扱っているPostgreSQL JDBCドライバのバージョンは9.0-801.jdbc4と古く、
+https://devcenter.heroku.com/articles/heroku-postgresql#version-support-and-legacy-infrastructure\ の通り、今はHeroku側もデフォルトでPostgreSQLのバージョンが9.3なので、上げた方が良いですね。
