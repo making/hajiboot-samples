@@ -183,7 +183,7 @@ Spring Boot1.1ではH2(1.3.176) + Spring Data JPA (Hibernate) + Log4JDBCの組�
 以下のためです。
 
 * HibernateがJDBC 4.0で追加された\ ``isWrapperFor``\ を呼んでいる
-* H2(1.3.176)が`isWrapperFor`を実装していない
+* H2(1.3.176)が\ ``isWrapperFor``\ を実装していない
 * Log4JBDCがJDBCのエラーをログ出力する
 * (Hibernateが\ ``isWrapperFor``\ がサポートされていないという例外を握りつぶす)
 
