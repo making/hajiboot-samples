@@ -74,9 +74,13 @@
      - src/main/resources/customers/list.html
      - src/main/resources/templates/customers/list.html
      - 2014-12-01
-   * - P.108 3.3.4
-     - customers/delete&id={id}
-     - customers/delete?id={id}
+   * - P.94,95 ファイルパス(3箇所)
+     - src/main/resources/customers/list.html
+     - src/main/resources/templates/customers/list.html
+     - 2014-12-10
+   * - P.99 サンプルコードの上から5行目
+     - name="firstName"
+     - name="lastName"
      - 2014-11-26
    * - P.117 「このように～」の文章 
      - 「このように～」の文章がノートの外側
