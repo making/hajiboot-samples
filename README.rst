@@ -204,7 +204,7 @@ pom.xmlを以下のように修正してください。
 
     <properties>
         <java.version>1.8</java.version>
-        <h2.version2>1.4.182</h2.version2><!-- ここ追加 -->
+        <h2.version>1.4.182</h2.version><!-- ここ追加 -->
     </properties>
 
 ちなみにSpring Boot 1.2では始めからH2 1.4.182が使われるようになっています。
