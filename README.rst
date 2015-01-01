@@ -100,7 +100,7 @@
      - 2014-11-18
    * - P.133 ファイルパス(2箇所)
      - src/main/resources/V3_add_user.sql
-     - src/main/resources/db/migration/V3_add_user.sql
+     - src/main/resources/db/migration/V3__add_user.sql
      - 2014-12-01
    * - P.155 
      - 「Unitコード」
