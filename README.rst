@@ -113,6 +113,47 @@
 
 \*1 ... チェック例外の場合はロールバックされません(\ **重要**\ )
 
+Spring Boot 1.2へのアップデート
+================================================================================
+「はじめてのSpring Boot」出版後、Spring Boot 1.2がリリースされました。リリースノートは\ `こちら <https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-1.2-Release-Notes>`_\ を参照してください。
+代表的な変更点は筆者の\ `発表資料 <http://www.slideshare.net/makingx/spring-boot12>`_\ にもまとまっています。
+
+また、Spring Boot 1.2ではSpring Frameworkのバージョンが4.1になりました。Spring Framework 4.1の新機能は\ `こちらの発表資料 <http://www.slideshare.net/makingx/springone-2gx-2014-spring-41-jsug/19>`_\ を参照してください。
+
+Spring Boot 1.2を使う場合は以下のように、\ ``spring-boot-starter-parent``\ のバージョンを変更するだけで良いです。
+
+.. code-block:: xml
+   
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.2.1.RELEASE</version>
+    </parent>
+
+
+ここではSpring Boot 1.2の変更で本書に影響する箇所について紹介します。
+
+
+\ ``@SpringBootApplication``\ の使用
+--------------------------------------------------------------------------------
+新たに\ ``@SpringBootApplication``\ が導入されました。これは\ ``@EnableAutoConfiguration``\ + \ ``@ComponentScan``\ + \ ``@Configuration``\ を1つにまとめたものです。
+
+本書では\ ``App``\ クラスに\ ``@EnableAutoConfiguration``\ と \ ``@ComponentScan``\ をつけていましたので、この2つの代わりに\ ``@SpringBootApplication``\ をつけるだけで良くなります。
+
+\ ``CharacterEncodingFilter``\ のデフォルト化
+--------------------------------------------------------------------------------
+\ ``CharacterEncodingFilter``\ によるUTF-8の設定が自動で行われるようになりました。3.3以降で\ ``AppConfig``\ クラスに設定していた以下の内容は省略可能になります。
+
+.. code-block:: java
+
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    @Bean
+    CharacterEncodingFilter characterEncodingFilter() {
+        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        filter.setEncoding("UTF-8");
+        filter.setForceEncoding(true);
+        return filter;
+    }
 
 FAQ
 ================================================================================
