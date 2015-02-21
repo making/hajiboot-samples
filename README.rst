@@ -46,6 +46,10 @@
      - (b) 「エラーが発生した場合」は 
      - (b) 「\ **実行時例外が**\ 発生した場合」は (*1)
      - 2014-11-18
+   * - P.65 ページ末
+     - 実行できます。
+     - 実行できます。2.2で作成した\ ``App``\ 、\ ``AppConfig``\ および、\ ``logback.xml``\ をhajiboot-jpaプロジェクトにコピーしてください。
+     - 2015-02-21
    * - P.68 中央のAppクラスの説明
      - \ ``customerRepository.findAllOrderById()``\ 
      - \ ``customerRepository.findAllOrderByName()``\ 
