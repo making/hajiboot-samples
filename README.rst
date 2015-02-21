@@ -50,6 +50,10 @@
      - \ ``customerRepository.findAllOrderById()``\ 
      - \ ``customerRepository.findAllOrderByName()``\ 
      - 2014-11-18
+   * - P.68 中央のAppクラスの説明の後
+     - データの出力順が、以下のように変わりました。
+     - ここで、2.2.3で作成したdata.sqlをsrc/main/resourcesにコピーしてください。その後、「Appクラス」を実行しましょう。データの出力順が、以下のように変わりました。
+     - 2015-02-21
    * - P.69 ノート
      - \ ``List<Customer> findAllOrderById()``\ 
      - \ ``List<Customer> findAllOrderByName()``\ 
