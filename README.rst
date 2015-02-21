@@ -30,6 +30,10 @@
      - 「DI コンテナ」に管理させたい「Bean」を生成するメソッドに、「@Configuration」
      - 「DI コンテナ」に管理させたい「Bean」を生成するメソッドに、「@Bean」
      - 2014-11-26
+   * - P.45 ページ先頭
+     - 「pom.xml」に、以下のように依存関係を追加します。
+     - 「pom.xml」に、以下のように依存関係を追加します。\ **なお、今後pom.xmlを全て記載する際には、これまでのようにmvn archetype:generateでプロジェクトを作り直してください。-DartifactIdにはpom.xmlの<artifactId>タグの値を指定してください。**\ 
+     - 2015-02-21
    * - P.47 米印のコメント
      - 「autoFigure」の仕組みについては
      - 「autoconfigure」の仕組みについては
