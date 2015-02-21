@@ -48,7 +48,7 @@
      - 2014-11-18
    * - P.65 ページ末
      - 実行できます。
-     - 実行できます。2.2で作成した\ ``App``\ 、\ ``AppConfig``\ および、\ ``logback.xml``\ をhajiboot-jpaプロジェクトにコピーしてください。
+     - 実行できます。2.2で作成した\ ``App``\ 、\ ``AppConfig``\ および、\ ``logback.xml``\ を今回のプロジェクトにコピーしてください。
      - 2015-02-21
    * - P.68 中央のAppクラスの説明
      - \ ``customerRepository.findAllOrderById()``\ 
