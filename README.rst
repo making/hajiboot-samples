@@ -365,3 +365,20 @@ H2同様にPostgreSQL + Hibernateでも同様のエラーログが出力され�
 
 ただ、書籍で扱っているPostgreSQL JDBCドライバのバージョンは9.0-801.jdbc4と古く、
 https://devcenter.heroku.com/articles/heroku-postgresql#version-support-and-legacy-infrastructure\ の通り、今はHeroku側もデフォルトでPostgreSQLのバージョンが9.3なので、上げた方が良いですね。
+
+Lombok 1.16にするとRESTのレスポンスからフィールドが消える
+--------------------------------------------------------------------------------------------
+\ `こちら <https://twitter.com/kis/status/569250617882861568>`_\ 参照。
+
+Lombokのバージョン1.16(書籍では1.14を使用)にすると3章以降の\ ``CustomerRestController``\ のレスポンスJSONからフィールドが消えてしまうようです。
+
+1.16を使う場合は、以下のように\ ``Customer``\ クラスに\ ``Serializable``\ をつけてください。
+
+.. code-block:: java
+
+   public class Customer implements Serializable {
+      // ...
+   }
+   
+なお、本書では省略しましたが、一般的には永続化や複製する場合などを考え、Entityには\ ``Serializable``\ をつけます。
+1.16に限らず、\ ``Serializable``\ をつけたほうが良いです。
