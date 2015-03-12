@@ -33,6 +33,10 @@
      - ssrc/main/resources/db/migration/V3_add_user.sql
      - src/main/resources/db/migration/V3__add_user.sql
      - 2015-02-21
+   * - P.150 AppConfig クラス
+     - url = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath() + ":" + dbUri.getPort() + dbUri.getPath();
+     - url = "jdbc:postgresql://" + dbUri.getHost() + ":" + dbUri.getPort() + dbUri.getPath();
+     - 2015-03-13
 
 正誤表 (第1刷)
 ================================================================================
@@ -140,6 +144,10 @@
      - src/main/resources/V3_add_user.sql
      - src/main/resources/db/migration/V3__add_user.sql
      - 2014-12-01
+   * - P.150 AppConfig クラス
+     - url = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath() + ":" + dbUri.getPort() + dbUri.getPath();
+     - url = "jdbc:postgresql://" + dbUri.getHost() + ":" + dbUri.getPort() + dbUri.getPath();
+     - 2015-03-13
    * - P.155 
      - 「Unitコード」
      - 「JUnitコード」
