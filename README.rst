@@ -29,6 +29,11 @@
      - データの出力順が、以下のように変わりました。
      - ここで、2.2.3で作成したdata.sqlをsrc/main/resourcesにコピーしてください。その後、「Appクラス」を実行しましょう。データの出力順が、以下のように変わりました。
      - 2015-02-21
+   * - P.128 SecurityConfigクラス
+     - | \ ``.usernameParameter("username").passwordParameter("password")``\ 
+       | \ ``.and();``\ 
+     - \ ``.usernameParameter("username").passwordParameter("password");``\ 
+     - 2015-05-20
    * - P.133 ファイルパス(2箇所)
      - ssrc/main/resources/db/migration/V3_add_user.sql
      - src/main/resources/db/migration/V3__add_user.sql
@@ -136,6 +141,11 @@
      - 「3.5.1」 「application.yml」の変更
      - 「3.5.1」 「User」の「エンティティ」と「リポジトリ」作成
      - 2014-11-24
+   * - P.128 SecurityConfigクラス
+     - | \ ``.usernameParameter("username").passwordParameter("password")``\ 
+       | \ ``.and();``\ 
+     - \ ``.usernameParameter("username").passwordParameter("password");``\ 
+     - 2015-05-20
    * - P.131 loginForm.html (1)付近
      - Invalid username and password.
      - ユーザー名またはパスワードが正しくありません。
