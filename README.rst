@@ -400,3 +400,44 @@ Lombokのバージョン1.16(書籍では1.14を使用)にすると3章以降の
    
 なお、本書では省略しましたが、一般的には永続化や複製する場合などを考え、Entityには\ ``Serializable``\ をつけます。
 1.16に限らず、\ ``Serializable``\ をつけたほうが良いです。
+
+
+JDK 1.8.0_40以上で\ ``mvn spring-boot:run``\ に失敗する
+--------------------------------------------------------------------------------------------
+JDK 1.8.0_40以上では本書で指定したSpring Loadedが動きません。 https://github.com/spring-projects/spring-loaded/issues/108
+
+1.2.2以上にバージョンアップするか、\ ``springloaded``\ の定義を削除してください。
+
+* バージョンアップ
+
+   .. code-block:: xml
+   
+      <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <dependencies>
+              <dependency>
+                  <groupId>org.springframework</groupId>
+                  <artifactId>springloaded</artifactId>
+                  <version>1.2.3.RELEASE</version>
+              </dependency>
+          </dependencies>
+       </plugin>
+
+* 削除
+
+   .. code-block:: xml
+   
+      <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <!-- ここから削除
+          <dependencies>
+              <dependency>
+                  <groupId>org.springframework</groupId>
+                  <artifactId>springloaded</artifactId>
+                  <version>1.2.1.RELEASE</version>
+              </dependency>
+          </dependencies>
+          ここまで削除 -->
+       </plugin>
