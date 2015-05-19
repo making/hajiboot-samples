@@ -441,3 +441,124 @@ JDK 1.8.0_40以上では本書で指定したSpring Loadedが動きません。 
           </dependencies>
           ここまで削除 -->
        </plugin>
+
+Spring Boot 1.2.3に上げると\ ``DataSource``\ の作成に失敗する
+--------------------------------------------------------------------------------------------
+
+Spring Boot 1.2.3にすると、\ ``AppConfig``\ に二つ定義した\ ``DataSource``\ が原因で
+
+\ ``No qualifying bean of type [javax.sql.DataSource] is defined: expected single matching bean but found 2: realDataSource,dataSource``\ 
+
+というエラーメッセージが出力され、アプリケーションの起動に失敗します (1.2.2では問題ない)。
+
+.. code-block:: console
+
+     .   ____          _            __ _ _
+    /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+   ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+    \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+     '  |____| .__|_| |_|_| |_\__, | / / / /
+    =========|_|==============|___/=/_/_/_/
+    :: Spring Boot ::        (v1.2.3.RELEASE)
+   
+   (略)
+   2015-05-20 02:56:33.804  WARN 4027 --- [           main] ationConfigEmbeddedWebApplicationContext : Exception encountered during context initialization - cancelling refresh attempt
+   
+   org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private javax.sql.DataSource org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration.dataSource; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'realDataSource' defined in class path resource [com/example/AppConfig.class]: Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSourceInitializer': Invocation of init method failed; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [javax.sql.DataSource] is defined: expected single matching bean but found 2: realDataSource,dataSource
+   	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210)
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+   	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+   	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+   	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+   	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+   	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:368)
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1119)
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1014)
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:504)
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+   	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+   	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+   	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+   	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+   	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:956)
+   	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:747)
+   	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+   	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118)
+   	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:686)
+   	at org.springframework.boot.SpringApplication.run(SpringApplication.java:320)
+   	at org.springframework.boot.SpringApplication.run(SpringApplication.java:957)
+   	at org.springframework.boot.SpringApplication.run(SpringApplication.java:946)
+   	at com.example.App.main(App.java:12)
+   Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private javax.sql.DataSource org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration.dataSource; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'realDataSource' defined in class path resource [com/example/AppConfig.class]: Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSourceInitializer': Invocation of init method failed; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [javax.sql.DataSource] is defined: expected single matching bean but found 2: realDataSource,dataSource
+   	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561)
+   	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+   	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+   	... 25 common frames omitted
+   Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'realDataSource' defined in class path resource [com/example/AppConfig.class]: Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSourceInitializer': Invocation of init method failed; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [javax.sql.DataSource] is defined: expected single matching bean but found 2: realDataSource,dataSource
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:547)
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+   	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+   	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+   	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+   	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+   	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1120)
+   	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1044)
+   	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
+   	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533)
+   	... 27 common frames omitted
+   Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSourceInitializer': Invocation of init method failed; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [javax.sql.DataSource] is defined: expected single matching bean but found 2: realDataSource,dataSource
+   	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:136)
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:408)
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1566)
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+   	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+   	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+   	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+   	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:217)
+   	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:350)
+   	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:331)
+   	at org.springframework.boot.autoconfigure.jdbc.DataSourceInitializerPostProcessor.postProcessAfterInitialization(DataSourceInitializerPostProcessor.java:62)
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsAfterInitialization(AbstractAutowireCapableBeanFactory.java:422)
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1579)
+   	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+   	... 36 common frames omitted
+   Caused by: org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [javax.sql.DataSource] is defined: expected single matching bean but found 2: realDataSource,dataSource
+   	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:365)
+   	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:331)
+   	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:968)
+   	at org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer.init(DataSourceInitializer.java:67)
+   	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   	at java.lang.reflect.Method.invoke(Method.java:497)
+   	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1270)
+   	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.invoke(InitDestroyAnnotationBeanPostProcessor.java:349)
+   	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeInitMethods(InitDestroyAnnotationBeanPostProcessor.java:300)
+   	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:133)
+   	... 50 common frames omitted
+   
+   2015-05-20 02:56:33.814  INFO 4027 --- [           main] o.apache.catalina.core.StandardService   : Stopping service Tomcat
+   2015-05-20 02:56:33.837  INFO 4027 --- [           main] .b.l.ClasspathLoggingApplicationListener : Application failed to start with classpath: [file:/Users/maki/git/hajiboot-samples/chapter03/3.2.1_hajiboot-rest/src/main/resources/, file:/Users/maki/git/hajiboot-samples/chapter03/3.2.1_hajiboot-rest/src/main/resources/, file:/Users/maki/git/hajiboot-samples/chapter03/3.2.1_hajiboot-rest/target/classes/, file:/Users/maki/.m2/repository/org/aspectj/aspectjweaver/1.8.5/aspectjweaver-1.8.5.jar, file:/Users/maki/.m2/repository/org/springframework/boot/spring-boot-starter/1.2.3.RELEASE/spring-boot-starter-1.2.3.RELEASE.jar, file:/Users/maki/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.4.5/jackson-core-2.4.5.jar, file:/Users/maki/.m2/repository/org/springframework/spring-core/4.1.6.RELEASE/spring-core-4.1.6.RELEASE.jar, file:/Users/maki/.m2/repository/org/springframework/spring-context/4.1.6.RELEASE/spring-context-4.1.6.RELEASE.jar, file:/Users/maki/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/1.2.3.RELEASE/spring-boot-starter-data-jpa-1.2.3.RELEASE.jar, file:/Users/maki/.m2/repository/org/yaml/snakeyaml/1.14/snakeyaml-1.14.jar, file:/Users/maki/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar, file:/Users/maki/.m2/repository/org/springframework/spring-webmvc/4.1.6.RELEASE/spring-webmvc-4.1.6.RELEASE.jar, file:/Users/maki/.m2/repository/org/springframework/spring-orm/4.1.6.RELEASE/spring-orm-4.1.6.RELEASE.jar, file:/Users/maki/.m2/repository/com/h2database/h2/1.4.185/h2-1.4.185.jar, file:/Users/maki/.m2/repository/org/slf4j/jul-to-slf4j/1.7.11/jul-to-slf4j-1.7.11.jar, file:/Users/maki/.m2/repository/org/springframework/boot/spring-boot-starter-aop/1.2.3.RELEASE/spring-boot-starter-aop-1.2.3.RELEASE.jar, file:/Users/maki/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/1.2.3.RELEASE/spring-boot-starter-jdbc-1.2.3.RELEASE.jar, file:/Users/maki/.m2/repository/org/springframework/spring-aspects/4.1.6.RELEASE/spring-aspects-4.1.6.RELEASE.jar, file:/Users/maki/.m2/repository/org/springframework/spring-web/4.1.6.RELEASE/spring-web-4.1.6.RELEASE.jar, file:/Users/maki/.m2/repository/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar, file:/Users/maki/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/8.0.20/tomcat-embed-el-8.0.20.jar, file:/Users/maki/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar, file:/Users/maki/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/1.2.3.RELEASE/spring-boot-starter-tomcat-1.2.3.RELEASE.jar, file:/Users/maki/.m2/repository/ch/qos/logback/logback-classic/1.1.3/logback-classic-1.1.3.jar, file:/Users/maki/.m2/repository/org/apache/tomcat/tomcat-juli/8.0.20/tomcat-juli-8.0.20.jar, file:/Users/maki/.m2/repository/org/aspectj/aspectjrt/1.8.5/aspectjrt-1.8.5.jar, file:/Users/maki/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar, file:/Users/maki/.m2/repository/org/springframework/spring-expression/4.1.6.RELEASE/spring-expression-4.1.6.RELEASE.jar, file:/Users/maki/.m2/repository/org/slf4j/jcl-over-slf4j/1.7.11/jcl-over-slf4j-1.7.11.jar, file:/Users/maki/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/8.0.20/tomcat-embed-websocket-8.0.20.jar, file:/Users/maki/.m2/repository/org/apache/tomcat/tomcat-jdbc/8.0.20/tomcat-jdbc-8.0.20.jar, file:/Users/maki/.m2/repository/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar, file:/Users/maki/.m2/repository/org/slf4j/log4j-over-slf4j/1.7.11/log4j-over-slf4j-1.7.11.jar, file:/Users/maki/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar, file:/Users/maki/.m2/repository/org/apache/tomcat/embed/tomcat-embed-logging-juli/8.0.20/tomcat-embed-logging-juli-8.0.20.jar, file:/Users/maki/.m2/repository/org/springframework/spring-aop/4.1.6.RELEASE/spring-aop-4.1.6.RELEASE.jar, file:/Users/maki/.m2/repository/com/fasterxml/classmate/1.0.0/classmate-1.0.0.jar, file:/Users/maki/.m2/repository/org/springframework/spring-jdbc/4.1.6.RELEASE/spring-jdbc-4.1.6.RELEASE.jar, file:/Users/maki/.m2/repository/org/springframework/boot/spring-boot/1.2.3.RELEASE/spring-boot-1.2.3.RELEASE.jar, file:/Users/maki/.m2/repository/ch/qos/logback/logback-core/1.1.3/logback-core-1.1.3.jar, file:/Users/maki/.m2/repository/org/springframework/data/spring-data-jpa/1.7.2.RELEASE/spring-data-jpa-1.7.2.RELEASE.jar, file:/Users/maki/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/8.0.20/tomcat-embed-core-8.0.20.jar, file:/Users/maki/.m2/repository/org/projectlombok/lombok/1.14.0/lombok-1.14.0.jar, file:/Users/maki/.m2/repository/org/jboss/jandex/1.1.0.Final/jandex-1.1.0.Final.jar, file:/Users/maki/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.jar, file:/Users/maki/.m2/repository/org/springframework/spring-beans/4.1.6.RELEASE/spring-beans-4.1.6.RELEASE.jar, file:/Users/maki/.m2/repository/org/springframework/data/spring-data-commons/1.9.2.RELEASE/spring-data-commons-1.9.2.RELEASE.jar, file:/Users/maki/.m2/repository/org/jboss/logging/jboss-logging/3.1.3.GA/jboss-logging-3.1.3.GA.jar, file:/Users/maki/.m2/repository/org/lazyluke/log4jdbc-remix/0.2.7/log4jdbc-remix-0.2.7.jar, file:/Users/maki/.m2/repository/org/hibernate/hibernate-validator/5.1.3.Final/hibernate-validator-5.1.3.Final.jar, file:/Users/maki/.m2/repository/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar, file:/Users/maki/.m2/repository/org/slf4j/slf4j-api/1.7.11/slf4j-api-1.7.11.jar, file:/Users/maki/.m2/repository/org/hibernate/hibernate-core/4.3.8.Final/hibernate-core-4.3.8.Final.jar, file:/Users/maki/.m2/repository/org/hibernate/common/hibernate-commons-annotations/4.0.5.Final/hibernate-commons-annotations-4.0.5.Final.jar, file:/Users/maki/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/1.2.3.RELEASE/spring-boot-autoconfigure-1.2.3.RELEASE.jar, file:/Users/maki/.m2/repository/org/springframework/boot/spring-boot-starter-web/1.2.3.RELEASE/spring-boot-starter-web-1.2.3.RELEASE.jar, file:/Users/maki/.m2/repository/org/hibernate/hibernate-entitymanager/4.3.8.Final/hibernate-entitymanager-4.3.8.Final.jar, file:/Users/maki/.m2/repository/org/jboss/logging/jboss-logging-annotations/1.2.0.Beta1/jboss-logging-annotations-1.2.0.Beta1.jar, file:/Users/maki/.m2/repository/junit/junit/4.12/junit-4.12.jar, file:/Users/maki/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.4.5/jackson-annotations-2.4.5.jar, file:/Users/maki/.m2/repository/org/springframework/spring-tx/4.1.6.RELEASE/spring-tx-4.1.6.RELEASE.jar, file:/Users/maki/.m2/repository/javax/transaction/javax.transaction-api/1.2/javax.transaction-api-1.2.jar, file:/Users/maki/.m2/repository/org/springframework/boot/spring-boot-starter-logging/1.2.3.RELEASE/spring-boot-starter-logging-1.2.3.RELEASE.jar, file:/Users/maki/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.4.5/jackson-databind-2.4.5.jar, file:/Users/maki/.m2/repository/org/springframework/springloaded/1.2.3.RELEASE/springloaded-1.2.3.RELEASE.jar]
+   2015-05-20 02:56:33.840  INFO 4027 --- [           main] utoConfigurationReportLoggingInitializer : 
+   
+   Error starting ApplicationContext. To display the auto-configuration report enabled debug logging (start with --debug)
+   
+   
+   2015-05-20 02:56:33.841 ERROR 4027 --- [           main] o.s.boot.SpringApplication               : Application startup failed
+   (略)
+   
+   
+原因は調査中ですが、ワークアランドとしては\ ``AppConfig``\ に以下の対応を行ってください。
+
+.. code-block:: java
+   
+   import org.springframework.context.annotation.Primary;
+   
+   @Primary // 追加
+   @Bean
+   DataSource dataSource() {
+      return new Log4jdbcProxyDataSource(this.dataSource);
+   }
