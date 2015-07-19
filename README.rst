@@ -562,3 +562,70 @@ Spring Boot 1.2.3にすると、\ ``AppConfig``\ に二つ定義した\ ``DataSo
    DataSource dataSource() {
       return new Log4jdbcProxyDataSource(this.dataSource);
    }
+
+
+書籍の設定でMySQLを使用すると\ ``CommunicationsException``\ が発生する
+--------------------------------------------------------------------------------------------
+
+MySQLのコネクションはデフォルトで最後の接続から8時間後にタイムアウトし、この状態でPoolしている\ ``Connection``\ にアクセスすると
+\ ``com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: The last packet successfully received from the server was XXXX milliseconds ago.``\ が発生します。
+(この説明は正確ではないかも)
+
+この事象に対する正しい対処方法は\ `Stack Overflow <http://stackoverflow.com/a/22687418>`_\ でコミッターのStéphaneが回答しているように、
+\ ``application.yml``\ に
+
+.. code-block:: yaml
+
+    spring.datasource.testOnBorrow: true
+    spring.datasource.validationQuery: SELECT 1
+
+を設定することです。
+
+ところが、書籍の\ ``AppConfig``\ の以下の設定では\ ``DataSourceBuilder``\ を使って\ ``url``\ 、\ ``username``\ 、\ ``password``\ しか設定していないため、
+これ以外の\ ``spring.datasource.``\ で始まるプロパティは適用されません。
+
+.. code-block:: java
+
+    // ダメな設定
+    @Bean
+    DataSource realDataSource() {
+        DataSourceBuilder factory = DataSourceBuilder
+                .create(this.dataSourceProperties.getClassLoader())
+                .url(this.dataSourceProperties.getUrl())
+                .username(this.dataSourceProperties.getUsername())
+                .password(this.dataSourceProperties.getPassword());
+        this.dataSource = factory.build();
+        return this.dataSource;
+    }
+
+    @Bean
+    DataSource dataSource() {
+        return new Log4jdbcProxyDataSource(this.dataSource);
+    }
+
+
+JavaConfigでマニュアルで作成した\ ``DataSource``\ にプロパティを適用するには\ ``@org.springframework.boot.context.properties.ConfigurationProperties``\ アノテーションを使用します。
+
+\ ``AppConfig``\ を以下のように修正してください。
+
+
+.. code-block:: java
+
+    @ConfigurationProperties("spring.datasource") // ここを追加
+    @Bean
+    DataSource realDataSource() {
+        DataSourceBuilder factory = DataSourceBuilder
+                .create(this.dataSourceProperties.getClassLoader())
+                .url(this.dataSourceProperties.getUrl())
+                .username(this.dataSourceProperties.getUsername())
+                .password(this.dataSourceProperties.getPassword());
+        this.dataSource = factory.build();
+        return this.dataSource;
+    }
+
+    @Bean
+    DataSource dataSource() {
+        return new Log4jdbcProxyDataSource(this.dataSource);
+    }
+
+\ **MySQLを使っていない場合も、この設定は行うべき**\ です。
