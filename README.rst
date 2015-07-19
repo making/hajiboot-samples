@@ -598,6 +598,7 @@ MySQLのコネクションはデフォルトで最後の接続から8時間後�
         return this.dataSource;
     }
 
+    @Primary
     @Bean
     DataSource dataSource() {
         return new Log4jdbcProxyDataSource(this.dataSource);
@@ -623,6 +624,7 @@ JavaConfigでマニュアルで作成した\ ``DataSource``\ にプロパティ�
         return this.dataSource;
     }
 
+    @Primary
     @Bean
     DataSource dataSource() {
         return new Log4jdbcProxyDataSource(this.dataSource);
