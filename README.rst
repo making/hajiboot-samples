@@ -29,6 +29,10 @@
      - データの出力順が、以下のように変わりました。
      - ここで、2.2.3で作成したdata.sqlをsrc/main/resourcesにコピーしてください。その後、「Appクラス」を実行しましょう。データの出力順が、以下のように変わりました。
      - 2015-02-21
+   * - P.68、71の出力結果の表示順
+     - Nobita→Shizuka→Hidetoshi
+     - Hidetoshi→Nobita→Shizuka 詳細は\ `issues/17 <https://github.com/making/hajiboot-samples/issues/17#issuecomment-68485430>`_\ をご確認ください
+     - 2015-08-17
    * - P.128 SecurityConfigクラス
      - | \ ``.usernameParameter("username").passwordParameter("password")``\ 
        | \ ``.and();``\ 
@@ -93,6 +97,10 @@
      - \ ``customerRepository.findAllOrderById()``\ 
      - \ ``customerRepository.findAllOrderByName()``\ 
      - 2014-11-18
+   * - P.68、71の出力結果の表示順
+     - Nobita→Shizuka→Hidetoshi
+     - Hidetoshi→Nobita→Shizuka 詳細は\ `issues/17 <https://github.com/making/hajiboot-samples/issues/17#issuecomment-68485430>`_\ をご確認ください
+     - 2015-08-17
    * - P.68 中央のAppクラスの説明の後
      - データの出力順が、以下のように変わりました。
      - ここで、2.2.3で作成したdata.sqlをsrc/main/resourcesにコピーしてください。その後、「Appクラス」を実行しましょう。データの出力順が、以下のように変わりました。
