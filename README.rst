@@ -25,6 +25,10 @@
      - 実行できます。
      - 実行できます。2.2で作成した\ ``App``\ 、\ ``AppConfig``\ および、\ ``logback.xml``\ を今回のプロジェクトにコピーしてください。
      - 2015-02-21
+   * - P.53 2.2.3
+     - 少し脱線していましますが
+     - 少し脱線してしまいますが
+     - 2015-08-19
    * - P.68 中央のAppクラスの説明の後
      - データの出力順が、以下のように変わりました。
      - ここで、2.2.3で作成したdata.sqlをsrc/main/resourcesにコピーしてください。その後、「Appクラス」を実行しましょう。データの出力順が、以下のように変わりました。
@@ -77,6 +81,10 @@
      - 「autoFigure」の仕組みについては
      - 「autoconfigure」の仕組みについては
      - 2014-11-18
+   * - P.53 2.2.3
+     - 少し脱線していましますが
+     - 少し脱線してしまいますが
+     - 2015-08-19
    * - P.54 「Log4JDBC」用の「DataSource」の定義
      - これまでは「Spring Boot」の「@EnableAutoConfiguration」の効果で、「DateSource」が
      - これまでは「Spring Boot」の「@EnableAutoConfiguration」の効果で、「Dat\ **a**\ Source」が
