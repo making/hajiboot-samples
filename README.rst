@@ -161,6 +161,10 @@
      - 「3.5.1」 「application.yml」の変更
      - 「3.5.1」 「User」の「エンティティ」と「リポジトリ」作成
      - 2014-11-24
+   * - P.119、123 プロジェクト構成内
+     - V2__import-initaial-data.sql
+     - V2__import-initial-data.sql
+     - 2015-10-07
    * - P.128 SecurityConfigクラス
      - | \ ``.usernameParameter("username").passwordParameter("password")``\ 
        | \ ``.and();``\ 
