@@ -37,6 +37,10 @@
      - Nobita→Shizuka→Hidetoshi
      - Hidetoshi→Nobita→Shizuka 詳細は\ `issues/17 <https://github.com/making/hajiboot-samples/issues/17#issuecomment-68485430>`_\ をご確認ください
      - 2015-08-17
+   * - P.119、123 プロジェクト構成内
+     - V2__import-initaial-data.sql
+     - V2__import-initial-data.sql
+     - 2015-10-07
    * - P.128 SecurityConfigクラス
      - | \ ``.usernameParameter("username").passwordParameter("password")``\ 
        | \ ``.and();``\ 
