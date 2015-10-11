@@ -46,6 +46,10 @@
        | \ ``.and();``\ 
      - \ ``.usernameParameter("username").passwordParameter("password");``\ 
      - 2015-05-20
+   * - P.130 3.5.5 2行目
+     - 「SecurityConfig "」
+     - 「SecurityConfig」
+     - 2015-10-11
    * - P.133 ファイルパス(2箇所)
      - ssrc/main/resources/db/migration/V3_add_user.sql
      - src/main/resources/db/migration/V3__add_user.sql
