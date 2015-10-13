@@ -174,6 +174,10 @@
        | \ ``.and();``\ 
      - \ ``.usernameParameter("username").passwordParameter("password");``\ 
      - 2015-05-20
+   * - P.130 3.5.5 2行目
+     - 「SecurityConfig "」
+     - 「SecurityConfig」
+     - 2015-10-11
    * - P.131 loginForm.html (1)付近
      - Invalid username and password.
      - ユーザー名またはパスワードが正しくありません。
