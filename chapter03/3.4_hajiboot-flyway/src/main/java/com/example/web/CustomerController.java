@@ -33,7 +33,7 @@ public class CustomerController {
         return "customers/list";
     }
 
-    @RequestMapping(value = "create", method = RequestMethod.POST)
+    @RequestMapping(path = "create", method = RequestMethod.POST)
     String create(@Validated CustomerForm form, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return list(model);
@@ -44,14 +44,14 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
-    @RequestMapping(value = "edit", params = "form", method = RequestMethod.GET)
+    @RequestMapping(path = "edit", params = "form", method = RequestMethod.GET)
     String editForm(@RequestParam Integer id, CustomerForm form) {
         Customer customer = customerService.findOne(id);
         BeanUtils.copyProperties(customer, form);
         return "customers/edit";
     }
 
-    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    @RequestMapping(path = "edit", method = RequestMethod.POST)
     String edit(@RequestParam Integer id, @Validated CustomerForm form, BindingResult result) {
         if (result.hasErrors()) {
             return editForm(id, form);
@@ -63,12 +63,12 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
-    @RequestMapping(value = "edit", params = "goToTop")
+    @RequestMapping(path = "edit", params = "goToTop")
     String goToTop() {
         return "redirect:/customers";
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    @RequestMapping(path = "delete", method = RequestMethod.POST)
     String delete(@RequestParam Integer id) {
         customerService.delete(id);
         return "redirect:/customers";
