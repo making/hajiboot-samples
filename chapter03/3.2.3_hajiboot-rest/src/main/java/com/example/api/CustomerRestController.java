@@ -21,12 +21,12 @@ public class CustomerRestController {
     CustomerService customerService;
 
     @RequestMapping(method = RequestMethod.GET)
-    Page<Customer> getCustomers(@PageableDefault Pageable pageable /* (1) */) {
-        Page<Customer> customers = customerService.findAll(pageable); // (2)
+    Page<Customer> getCustomers(@PageableDefault Pageable pageable) {
+        Page<Customer> customers = customerService.findAll(pageable);
         return customers;
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "{id}", method = RequestMethod.GET)
     Customer getCustomer(@PathVariable Integer id) {
         Customer customer = customerService.findOne(id);
         return customer;
@@ -42,13 +42,13 @@ public class CustomerRestController {
         return new ResponseEntity<>(created, headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
+    @RequestMapping(path = "{id}", method = RequestMethod.PUT)
     Customer putCustomer(@PathVariable Integer id, @RequestBody Customer customer) {
         customer.setId(id);
         return customerService.update(customer);
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteCustomer(@PathVariable Integer id) {
         customerService.delete(id);
