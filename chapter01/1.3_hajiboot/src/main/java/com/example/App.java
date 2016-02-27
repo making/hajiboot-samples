@@ -1,20 +1,20 @@
 package com.example;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController // (1)
-@EnableAutoConfiguration // (2)
+@RestController
+@SpringBootApplication
 public class App {
 
-    @RequestMapping("/") // (3)
+    @RequestMapping("/")
     String home() {
-        return "Hello World!"; // (4)
+        return "Hello World!";
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args); // (5)
+        SpringApplication.run(App.class, args);
     }
 }
