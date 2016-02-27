@@ -1,3 +1,4 @@
+
 package com.example.web;
 
 import com.example.domain.Customer;
@@ -5,7 +6,7 @@ import com.example.service.CustomerService;
 import com.example.service.LoginUserDetails;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,7 +36,7 @@ public class CustomerController {
         return "customers/list";
     }
 
-    @RequestMapping(value = "create", method = RequestMethod.POST)
+    @RequestMapping(path = "create", method = RequestMethod.POST)
     String create(@Validated CustomerForm form, BindingResult result, Model model,
                   @AuthenticationPrincipal LoginUserDetails userDetails) {
         if (result.hasErrors()) {
@@ -47,14 +48,14 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
-    @RequestMapping(value = "edit", params = "form", method = RequestMethod.GET)
+    @RequestMapping(path = "edit", params = "form", method = RequestMethod.GET)
     String editForm(@RequestParam Integer id, CustomerForm form) {
         Customer customer = customerService.findOne(id);
         BeanUtils.copyProperties(customer, form);
         return "customers/edit";
     }
 
-    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    @RequestMapping(path = "edit", method = RequestMethod.POST)
     String edit(@RequestParam Integer id, @Validated CustomerForm form, BindingResult result,
                 @AuthenticationPrincipal LoginUserDetails userDetails) {
         if (result.hasErrors()) {
@@ -67,12 +68,12 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
-    @RequestMapping(value = "edit", params = "goToTop")
+    @RequestMapping(path = "edit", params = "goToTop")
     String goToTop() {
         return "redirect:/customers";
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    @RequestMapping(path = "delete", method = RequestMethod.POST)
     String delete(@RequestParam Integer id) {
         customerService.delete(id);
         return "redirect:/customers";
