@@ -4,12 +4,16 @@ import com.example.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-@EnableAutoConfiguration
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+@SpringBootApplication
 public class App implements CommandLineRunner {
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
@@ -19,11 +23,10 @@ public class App implements CommandLineRunner {
         String sql = "SELECT id, first_name, last_name FROM customers WHERE id = :id";
         SqlParameterSource param = new MapSqlParameterSource()
                 .addValue("id", 1);
-        // ここから変更
         Customer result = jdbcTemplate.queryForObject(sql, param,
-                (rs, rowNum) -> new Customer(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name")) // (1)
+                (rs, rowNum) -> new Customer(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"))
         );
-        // ここまで
+
         System.out.println("result = " + result);
     }
 
