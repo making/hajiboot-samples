@@ -2,11 +2,11 @@ package com.example;
 
 import com.example.app.Frontend;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Import;
 
-@EnableAutoConfiguration
+@SpringBootApplication
 @Import(AppConfig.class)
 public class App {
     public static void main(String[] args) {
