@@ -3,6 +3,8 @@
 
 「\ `はじめてのSpring Boot <http://www.kohgakusha.co.jp/books/detail/978-4-7775-1865-4>`_\ 」のサポートページです。
 
+**Spring Boot 1.3対応のサンプルコードは**\ `こちら <https://github.com/making/hajiboot-samples/tree/1.3.x>`_\ **です。**
+
 このページでサンプルコードと正誤表を管理します。書籍の内容に関する間違いの指摘等はIssuesかPull Requestでお願いします。
 
 また、疑問やコメントはTwitterでハッシュタグ「#hajiboot」をつけてツイートしていただければ極力お答えします。気軽にツイートしてください。
