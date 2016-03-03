@@ -12,6 +12,21 @@
 **本の内容がSpring Boot 1.2や1.3では動かないという場合もサポートいたします**\ ので、\ `Issueで報告 <https://github.com/making/hajiboot-samples/issues/new>`_\ お願いいたします。
 回答の保証はありませんが、Spring Bootに関するよろず質問でもOKです。
 
+正誤表 (第3刷)
+================================================================================
+
+.. list-table::
+   :header-rows: 1
+
+   * - 場所
+     - 誤
+     - 正
+     - 訂正日
+   * - P.42
+     - public class Customer implements Serialize
+     - public class Customer implements Serializable
+     - 2016-03-03
+
 正誤表 (第2刷)
 ================================================================================
 
