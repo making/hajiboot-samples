@@ -15,7 +15,7 @@ public class HajibootJdbcApplication implements CommandLineRunner{
 	@Override
 	public void run(String... strings) throws Exception {
 		// データ追加
-		Customer created = customerRepository.save(new Customer(null, "Sugio", "Deki"));
+		Customer created = customerRepository.save(new Customer(null, "Hidetoshi", "Dekisugi"));
 		System.out.println(created + " is created!");
 		// データ表示
 		customerRepository.findAll()
