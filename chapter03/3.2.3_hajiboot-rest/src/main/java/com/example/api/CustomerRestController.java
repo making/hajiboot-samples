@@ -20,19 +20,19 @@ public class CustomerRestController {
     @Autowired
     CustomerService customerService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     Page<Customer> getCustomers(@PageableDefault Pageable pageable) {
         Page<Customer> customers = customerService.findAll(pageable);
         return customers;
     }
 
-    @RequestMapping(path = "{id}", method = RequestMethod.GET)
+    @GetMapping(path = "{id}")
     Customer getCustomer(@PathVariable Integer id) {
         Customer customer = customerService.findOne(id);
         return customer;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     ResponseEntity<Customer> postCustomers(@RequestBody Customer customer, UriComponentsBuilder uriBuilder) {
         Customer created = customerService.create(customer);
         URI location = uriBuilder.path("api/customers/{id}")
@@ -42,13 +42,13 @@ public class CustomerRestController {
         return new ResponseEntity<>(created, headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(path = "{id}", method = RequestMethod.PUT)
+    @PutMapping(path = "{id}")
     Customer putCustomer(@PathVariable Integer id, @RequestBody Customer customer) {
         customer.setId(id);
         return customerService.update(customer);
     }
 
-    @RequestMapping(path = "{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(path = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteCustomer(@PathVariable Integer id) {
         customerService.delete(id);
