@@ -1,42 +1,44 @@
-package com.example.api;
+package com.example;
 
-import com.example.App;
 import com.example.domain.Customer;
 import com.example.repository.CustomerRepository;
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.http.ContentType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import lombok.Data;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
+import java.util.List;
 
-import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.RestAssured.when;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.CoreMatchers.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = App.class)
-@WebAppConfiguration
-@IntegrationTest({"server.port:0",
-        "spring.datasource.url:jdbc:h2:mem:bookmark;DB_CLOSE_ON_EXIT=FALSE"})
-public class CustomerRestControllerIntegrationTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        properties = {"spring.datasource.url:jdbc:h2:mem:customers;DB_CLOSE_ON_EXIT=FALSE"})
+public class HajibootRestApplicationTests {
     @Autowired
     CustomerRepository customerRepository;
-    @Value("${local.server.port}")
+    @LocalServerPort
     int port;
     Customer customer1;
     Customer customer2;
 
-    // (4)
+    @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    static class Page<T> {
+        private List<T> content;
+        private int numberOfElements;
+    }
+
     @Before
     public void setUp() {
         customerRepository.deleteAll();
@@ -98,4 +100,5 @@ public class CustomerRestControllerIntegrationTest {
                 .statusCode(HttpStatus.OK.value())
                 .body("numberOfElements", is(1));
     }
+
 }
