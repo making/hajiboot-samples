@@ -1,4 +1,3 @@
-
 package com.example;
 
 import org.springframework.context.annotation.Bean;
@@ -8,7 +7,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -29,7 +27,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/customers", true)
                 .usernameParameter("username").passwordParameter("password");
         http.logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout**"))
                 .logoutSuccessUrl("/loginForm");
     }
 

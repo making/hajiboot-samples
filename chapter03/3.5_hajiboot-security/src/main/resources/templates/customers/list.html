@@ -15,8 +15,9 @@
     <h1>顧客管理システム</h1>
     <p>
         <span sec:authentication="principal.user.username">duke</span>さんログイン中。
-        <a th:href="@{/logout}" class="btn btn-default btn-xs">ログアウト</a>
     </p>
+    <form th:action="@{/logout}" method="post"><input type="submit" class="btn btn-default btn-xs" value="ログアウト" /></form>
+
     <div class="col-sm-12">
         <form th:action="@{/customers/create}" th:object="${customerForm}" class="form-horizontal" method="post">
             <fieldset>
