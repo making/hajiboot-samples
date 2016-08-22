@@ -2,10 +2,8 @@ package com.example;
 
 import com.example.domain.Customer;
 import com.example.repository.CustomerRepository;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import lombok.Data;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -31,13 +28,6 @@ public class HajibootRestApplicationTests {
     int port;
     Customer customer1;
     Customer customer2;
-
-    @Data
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    static class Page<T> {
-        private List<T> content;
-        private int numberOfElements;
-    }
 
     @Before
     public void setUp() {
@@ -100,5 +90,4 @@ public class HajibootRestApplicationTests {
                 .statusCode(HttpStatus.OK.value())
                 .body("numberOfElements", is(1));
     }
-
 }
