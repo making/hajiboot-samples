@@ -24,6 +24,7 @@ public class HajibootApplicationTests {
 	public void contextLoads() {
 		ResponseEntity<String> response = restTemplate.getForEntity(
 				"http://localhost:" + port, String.class);
+		// ResponseEntity<String> response = restTemplate.getForEntity("/", String.class);
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody()).isEqualTo("Hello World!");
 	}
