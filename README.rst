@@ -22,8 +22,11 @@
      - 誤
      - 正
      - 訂正日
-   * - P.42
-     - public class Customer implements Serialize
-     - public class Customer implements Serializable
-     - 2016-03-03
-
+   * - P.124 (2か所)
+     - application.yml
+     - application.properties
+     - 2016-09-09
+   * - P.124
+     - `security.basic.enabled: false`
+     - `security.basic.enabled: true`
+     - 2016-09-09
