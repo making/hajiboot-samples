@@ -1,19 +1,23 @@
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head lang="en">
     <meta charset="UTF-8"/>
     <title>顧客情報編集</title>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"
-          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap-theme.min.css}"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}"/>
 </head>
 <body>
 <div class="container">
     <h1>顧客管理システム</h1>
     <p>
-        <a th:href="@{/logout}" class="btn btn-default btn-xs">ログアウト</a>
+        <span sec:authentication="principal.user.username">duke</span>さんログイン中。
     </p>
+    <form th:action="@{/logout}" method="post"><input type="submit" class="btn btn-default btn-xs" value="ログアウト" /></form>
+
     <div class="col-sm-12">
         <form th:action="@{/customers/edit}" th:object="${customerForm}" class="form-horizontal" method="post">
             <fieldset>
@@ -51,7 +55,7 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
         th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
-        th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 </body>
 </html>

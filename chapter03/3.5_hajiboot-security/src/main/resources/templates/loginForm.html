@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8"/>
     <title>ログインフォーム</title>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"
-          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap-theme.min.css}"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}"/>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
         <h2 class="form-signin-heading">ログインフォーム</h2>
 
         <div th:if="${param.error}" class="alert alert-danger">
-           	 ユーザー名またはパスワードが正しくありません。
+            ユーザー名またはパスワードが正しくありません。
         </div>
         <input type="text" class="form-control" name="username" placeholder="Username" required="required"
                autofocus="autofocus"/>

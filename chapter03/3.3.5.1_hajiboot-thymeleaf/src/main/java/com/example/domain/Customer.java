@@ -1,3 +1,4 @@
+
 package com.example.domain;
 
 import lombok.AllArgsConstructor;

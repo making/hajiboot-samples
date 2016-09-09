@@ -6,14 +6,14 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity // (1)
-@Table(name = "customers") // (2)
+@Entity
+@Table(name = "customers")
 @Data
-@NoArgsConstructor // (3)
-@AllArgsConstructor // (4)
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer {
-    @Id // (5)
-    @GeneratedValue // (6)
+    @Id
+    @GeneratedValue
     private Integer id;
     @Column(nullable = false)
     private String firstName;

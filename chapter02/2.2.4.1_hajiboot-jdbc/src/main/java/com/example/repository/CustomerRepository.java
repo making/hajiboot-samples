@@ -13,12 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-@Transactional // (1)
+@Transactional
 public class CustomerRepository {
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
-
-    // (2)
+    
     private static final RowMapper<Customer> customerRowMapper = (rs, i) -> {
         Integer id = rs.getInt("id");
         String firstName = rs.getString("first_name");
@@ -29,7 +28,7 @@ public class CustomerRepository {
     public List<Customer> findAll() {
         List<Customer> customers = jdbcTemplate.query(
                 "SELECT id,first_name,last_name FROM customers ORDER BY id",
-                customerRowMapper); // (2)
+                customerRowMapper);
         return customers;
     }
 
@@ -42,8 +41,7 @@ public class CustomerRepository {
     }
 
     public Customer save(Customer customer) {
-        SqlParameterSource param = new BeanPropertySqlParameterSource(customer); // (3)
-        // (4)
+        SqlParameterSource param = new BeanPropertySqlParameterSource(customer);
         if (customer.getId() == null) {
             jdbcTemplate.update("INSERT INTO customers(first_name,last_name) values(:firstName, :lastName)",
                     param);
@@ -57,6 +55,6 @@ public class CustomerRepository {
     public void delete(Integer id) {
         SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
         jdbcTemplate.update("DELETE FROM customers WHERE id=:id",
-                param); // (5)
+                param);
     }
 }

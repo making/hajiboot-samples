@@ -16,7 +16,7 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Repository
-@Transactional // (1)
+@Transactional
 public class CustomerRepository {
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
@@ -25,12 +25,11 @@ public class CustomerRepository {
 
     @PostConstruct
     public void init() {
-        insert = new SimpleJdbcInsert((JdbcTemplate) jdbcTemplate.getJdbcOperations()) // (1)
-                .withTableName("customers") // (2)
-                .usingGeneratedKeyColumns("id"); // (3)
+        insert = new SimpleJdbcInsert((JdbcTemplate) jdbcTemplate.getJdbcOperations())
+                .withTableName("customers")
+                .usingGeneratedKeyColumns("id");
     }
 
-    // (2)
     private static final RowMapper<Customer> customerRowMapper = (rs, i) -> {
         Integer id = rs.getInt("id");
         String firstName = rs.getString("first_name");
@@ -41,7 +40,7 @@ public class CustomerRepository {
     public List<Customer> findAll() {
         List<Customer> customers = jdbcTemplate.query(
                 "SELECT id,first_name,last_name FROM customers ORDER BY id",
-                customerRowMapper); // (2)
+                customerRowMapper);
         return customers;
     }
 
@@ -57,7 +56,7 @@ public class CustomerRepository {
         SqlParameterSource param = new BeanPropertySqlParameterSource(customer);
         if (customer.getId() == null) {
             // ここから変更
-            Number key = insert.executeAndReturnKey(param); // (4)
+            Number key = insert.executeAndReturnKey(param);
             customer.setId(key.intValue());
             // ここまで
         } else {
@@ -70,6 +69,6 @@ public class CustomerRepository {
     public void delete(Integer id) {
         SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
         jdbcTemplate.update("DELETE FROM customers WHERE id=:id",
-                param); // (5)
+                param);
     }
 }
