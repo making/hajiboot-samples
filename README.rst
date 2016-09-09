@@ -27,6 +27,6 @@
      - application.properties
      - 2016-09-09
    * - P.124
-     - `security.basic.enabled: false`
-     - `security.basic.enabled: true`
+     - ``security.basic.enabled: false``
+     - ``security.basic.enabled=false``
      - 2016-09-09
