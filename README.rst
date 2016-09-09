@@ -3,7 +3,7 @@
 
 「\ `はじめてのSpring Boot [改訂版] <http://www.kohgakusha.co.jp/books/detail/978-4-7775-1969-9>`_\ 」のサポートページです。
 
-「\ `はじめてのSpring Boot <http://www.kohgakusha.co.jp/books/detail/978-4-7775-1865-4>`_\ 」初版(表紙がピンク)対応のサンプルコードは\ `こちら <https://github.com/making/hajiboot-samples/tree/1st-edition>`_\ です。
+**「はじめてのSpring Boot」初版(表紙がピンク)対応のサンプルコードは**\ `こちら <https://github.com/making/hajiboot-samples/tree/1st-edition>`_\ **です。**
 
 このページでサンプルコードと正誤表を管理します。書籍の内容に関する間違いの指摘等はIssuesかPull Requestでお願いします。
 
