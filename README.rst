@@ -30,3 +30,21 @@
      - ``security.basic.enabled: false``
      - ``security.basic.enabled=false``
      - 2016-09-09
+
+補足
+================================================================================
+
+PCF Devについて
+--------------------------------------------------------------------------------
+\ `PCF Dev <http://pcfdev.io>`_\ は開発用にローカル環境で簡単にCloud Foundryを試すためのVM環境です。Pivotal Cloud Foundryが提供しているサービス(MySQL、Redis、RabbitMQ)も初めから組み込まれていて、Virtual Boxだけで簡単にローカル開発環境を用意できます。。
+
+書面では名前だけ挙げて、使い方を紹介していないため、
+PCF Devの使い方は\ `こちら <https://github.com/Pivotal-Japan/cf-workshop/blob/master/pcf-dev.md>`_\ を参照してください。
+
+FAQ
+================================================================================
+
+PCF Devで本のサンプルアプリをデプロイできない
+--------------------------------------------------------------------------------
+
+Spring Boot 1.4からはjarのレイアウトが変わり、Cloud Foundryで動かすには\ `Java Buildpack 3.7以上が必要 <https://github.com/pivotal-cf/pcfdev/issues/130>`_\ になります。対応方法は\ `こちら <http://bit.ly/pcfdev-boot14>`_\ を参照してください。
