@@ -34,6 +34,10 @@
      - App クラス
      - HajibootLayeringApplicationクラス
      - 2016-09-18
+   * - P.81 (プログラム解説)
+     - (5), (5)
+     - (5), (6)
+     - 2016-09-18
    * - P.124 (2か所)
      - application.yml
      - application.properties
