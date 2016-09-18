@@ -7,7 +7,7 @@
 
 このページでサンプルコードと正誤表を管理します。書籍の内容に関する間違いの指摘等はIssuesかPull Requestでお願いします。
 
-また、疑問やコメントはTwitterでハッシュタグ「#hajiboot」をつけてツイートしていただければ極力お答えします。気軽にツイートしてください。
+また、疑問やコメントはTwitterでハッシュタグ「\ `#hajiboot <https://twitter.com/hashtag/hajiboot?f=tweets&vertical=default>`_\ 」をつけてツイートしていただければ極力お答えします。気軽にツイートしてください。
 
 **本の内容が最新Spring Bootでは動かないという場合もサポートいたします**\ ので、\ `Issueで報告 <https://github.com/making/hajiboot-samples/issues/new>`_\ お願いいたします。
 回答の保証はありませんが、Spring Bootに関するよろず質問でもOKです。
