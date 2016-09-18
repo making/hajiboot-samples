@@ -22,6 +22,10 @@
      - 誤
      - 正
      - 訂正日
+   * - P.44
+     - App クラス
+     - HajibootLayeringApplicationクラス
+     - 2016-09-18
    * - P.124 (2か所)
      - application.yml
      - application.properties
