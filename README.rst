@@ -69,6 +69,8 @@ FAQ
 PCF Devで本のサンプルアプリをデプロイできない
 --------------------------------------------------------------------------------
 
-Spring Boot 1.4からはjarのレイアウトが変わり、Cloud Foundryで動かすには\ `Java Buildpack 3.7以上が必要 <https://github.com/pivotal-cf/pcfdev/issues/130>`_\ になります。対応方法は\ `こちら <http://bit.ly/pcfdev-boot14>`_\ を参照してください。
+Spring Boot 1.4からはjarのレイアウトが変わり、Cloud Foundryで動かすには\ `Java Buildpack 3.7以上が必要 <https://github.com/pivotal-cf/pcfdev/issues/130>`_\ になります。\ `PCF Dev v.0.20.0 <https://network.pivotal.io/products/pcfdev#/releases/2298>`_\ 以上を使用してください。
 
+
+PCF Dev v0.19以下の場合の対応方法は\ `こちら <http://bit.ly/pcfdev-boot14>`_\ を参照してください。
 
