@@ -94,6 +94,10 @@
      - ``<p><span sec:authentication="principal.user.username">duke</span>さんログイン中。</p>``
      - この3行削除 (P. 141で登場）
      - 2016-11-07
+   * - P.135
+     - ``src/main/resources/migration/V3__add_user.sql`` (2箇所)
+     - ``src/main/resources/migration/V3__add-user.sql``
+     - 2016-11-07
    * - P.151
      - 2つ目の (1)
      - \(2\)
