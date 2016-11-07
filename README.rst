@@ -35,9 +35,17 @@
      - ``Frontend``\ クラスの上の\ ``@Bean``\ のインデントがずれている
      - 2016-11-07
    * - P.44
-     - App クラス
+     - Appクラス
      - HajibootLayeringApplicationクラス
      - 2016-09-18
+   * - P.61
+     - Appクラス
+     - HajibootJdbcApplicationクラス
+     - 2016-09-18
+   * - P.61
+     - https://console.run.pivotal.io/2/
+     - https://console.run.pivotal.io
+     - 2016-11-07
    * - P.81 (プログラム解説)
      - (5), (5)
      - (5), (6)
