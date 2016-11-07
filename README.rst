@@ -30,6 +30,10 @@
      - \- (漏れている)
      - \(2\) 「JavaConfig」を読み込むために、「@Import」で「@Configuration」アノテーション を付けた対象のクラスを指定。
      - 2016-09-18
+   * - P.36 
+     - \-
+     - ``Frontend``\ クラスの上の\ ``@Bean``\ のインデントがずれている
+     - 2016-11-07
    * - P.44
      - App クラス
      - HajibootLayeringApplicationクラス
