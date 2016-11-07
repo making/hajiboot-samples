@@ -102,6 +102,47 @@
 補足
 ================================================================================
 
+Spring Cloud Connectorsのコネクションプールに関する設定
+--------------------------------------------------------------------------------
+
+``AbstractCloudConfig``\ のデフォルト設定ではコネクションプールに関する設定が固定されてしまいます。コネクションプールに関する設定を行う場合は、次のように\ ``PooledServiceConnectorConfig.PoolConfig``\ クラスを使用します。
+
+.. code-block:: java
+
+   package com.example;
+
+   import javax.sql.DataSource;
+
+   import org.springframework.cloud.config.java.AbstractCloudConfig;
+   import org.springframework.cloud.service.PooledServiceConnectorConfig;
+   import org.springframework.cloud.service.relational.DataSourceConfig;
+   import org.springframework.context.annotation.Bean;
+   import org.springframework.context.annotation.Configuration;
+   import org.springframework.context.annotation.Profile;
+
+   @Configuration
+   @Profile("cloud")
+   public class CloudConfig extends AbstractCloudConfig {
+       @Bean
+       DataSource dataSource() {
+           PooledServiceConnectorConfig.PoolConfig poolConfig = new PooledServiceConnectorConfig.PoolConfig(
+                   5 /* 最小プール数 */, 30 /* 最大プール数 */, 3000 /* 最大待機時間 */);
+           return connectionFactory().dataSource(new DataSourceConfig(poolConfig, null));
+       }
+   }
+
+実は[4.6.3]で説明したAuto-Reconfigurationを利用すると次のログが出力されていました。
+
+.. code-block:: console
+
+   org.apache.tomcat.jdbc.pool.ConnectionPool         WARNING maxIdle is larger than maxActive, setting maxIdle to: 4``
+
+これはAuto-Reconfiguration側で最大接続数を4に指定しているからです(バックエンドサービスの無償枠向け)。[14]
+
+基本的にはspring-cloud-connectorを使って、コネクションプールの設定をすべきです。
+
+[14] .. https://discuss.pivotal.io/hc/en-us/articles/221898227-Connection-pool-warning-message-maxIdle-is-larger-than-maxActive-setting-maxIdle-to-4-seen-in-PCF-deployed-Spring-app
+
 「[4.5.4] アプリケーションのログ」で言及されているログマネージャーとの連携方法
 --------------------------------------------------------------------------------
 
