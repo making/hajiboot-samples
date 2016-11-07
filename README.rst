@@ -75,8 +75,12 @@
      - 「loginForm?error」に遷移するように
      - 2016-11-07
    * - P.134 下
-     - ``<p><span sec:authentication="principal.user.username">duke</span>さんログイン中。</p?``
+     - ``<p><span sec:authentication="principal.user.username">duke</span>さんログイン中。</p>``
      - この3行削除 (P. 141で登場）
+     - 2016-11-07
+   * - P.151
+     - 2つ目の (1)
+     - (2)
      - 2016-11-07
 
 補足
