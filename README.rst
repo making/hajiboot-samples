@@ -46,6 +46,10 @@
      - NO_CONTENT
      - NO CONTENT
      - 2016-11-07
+   * - P.85
+     - 204NoContent
+     - 204 No Content
+     - 2016-11-07
    * - P.124 (2か所)
      - application.yml
      - application.properties
