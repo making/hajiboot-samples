@@ -42,6 +42,10 @@
      - (5), (5)
      - (5), (6)
      - 2016-09-18
+   * - P.83 (6)
+     - NO_CONTENT
+     - NO CONTENT
+     - 2016-11-07
    * - P.124 (2か所)
      - application.yml
      - application.properties
