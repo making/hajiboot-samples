@@ -98,6 +98,10 @@
      - https://console.run.pivotal.io/2/
      - https://console.run.pivotal.io
      - 2016-11-07
+   * - P.171
+     - \-
+     - [4.7]の前に「\ `Spring Cloud Connectorsのコネクションプールに関する設定 <https://github.com/making/hajiboot-samples/blob/master/README.rst#spring-cloud-connectorsのコネクションプールに関する設定>`_\ 」を追加
+     - 2016-11-07
 
 補足
 ================================================================================
