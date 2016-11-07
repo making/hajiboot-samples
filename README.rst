@@ -62,6 +62,10 @@
      - ``ResponseEntity<CustomerpostCustomers(@RequestBody Customer customer, UriComponentsBuilder uriBuilder /* (1) */) {``
      - ``ResponseEntity<Customer> postCustomers(@RequestBody Customer customer, UriComponentsBuilder uriBuilder /* (1) */) {``
      - 2016-11-07
+   * - P.94 (4)
+     - コンテスト・パス
+     - コンテキスト・パス
+     - 2016-11-07
    * - P.107 ``editForm``\ メソッドの上のアノテーション
      - ``@PostMapping(path = "edit", params = "form")``
      - ``@GetMapping(path = "edit", params = "form")``
