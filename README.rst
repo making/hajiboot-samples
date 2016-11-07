@@ -62,6 +62,10 @@
      - ``security.basic.enabled: false``
      - ``security.basic.enabled=false``
      - 2016-09-09
+   * - P.129 下
+     - ``return new Pbkdf2PasswordEncoder(); // ()``
+     - ``return new Pbkdf2PasswordEncoder(); // (9)``
+     - 2016-11-07
 
 補足
 ================================================================================
