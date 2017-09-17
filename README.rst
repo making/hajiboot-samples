@@ -12,6 +12,25 @@
 **本の内容が最新Spring Bootでは動かないという場合もサポートいたします**\ ので、\ `Issueで報告 <https://github.com/making/hajiboot-samples/issues/new>`_\ お願いいたします。
 回答の保証はありませんが、Spring Bootに関するよろず質問でもOKです。
 
+正誤表 (第2刷)
+================================================================================
+
+.. list-table::
+   :header-rows: 1
+
+   * - 場所
+     - 誤
+     - 正
+     - 訂正日
+   * - P.176
+     - ``spring.datasource.url:jdbc:h2:mem:customers;DB_CLOSE_ON_EXIT=FALSE``
+     - ``spring.datasource.url:jdbc:log4jdbc:h2:mem:customers;DB_CLOSE_ON_EXIT=FALSE``
+     - 2017-09-18
+   * - P.179
+     - ``spring.datasource.url:jdbc:h2:mem:customers;DB_CLOSE_ON_EXIT=FALSE``
+     - ``spring.datasource.url:jdbc:log4jdbc:h2:mem:customers;DB_CLOSE_ON_EXIT=FALSE``
+     - 2017-09-18
+     
 正誤表 (第1刷)
 ================================================================================
 
@@ -110,6 +129,14 @@
      - \-
      - [4.7]の前に「\ `Spring Cloud Connectorsのコネクションプールに関する設定 <https://github.com/making/hajiboot-samples/blob/master/README.rst#spring-cloud-connectorsのコネクションプールに関する設定>`_\ 」を追加
      - 2016-11-07
+   * - P.176
+     - ``spring.datasource.url:jdbc:h2:mem:customers;DB_CLOSE_ON_EXIT=FALSE``
+     - ``spring.datasource.url:jdbc:log4jdbc:h2:mem:customers;DB_CLOSE_ON_EXIT=FALSE``
+     - 2017-09-18
+   * - P.179
+     - ``spring.datasource.url:jdbc:h2:mem:customers;DB_CLOSE_ON_EXIT=FALSE``
+     - ``spring.datasource.url:jdbc:log4jdbc:h2:mem:customers;DB_CLOSE_ON_EXIT=FALSE``
+     - 2017-09-18
 
 補足
 ================================================================================
