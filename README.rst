@@ -156,11 +156,11 @@ Spring Boot 1.5から、「Spring Boot Actuator」のエンドポイントに対
 [3.5]で説明したSpring Securityを使用し、認証ユーザーに対して"ROLE_ACTUATOR"ロールを付与する事で、
 認証後に「Spring Boot Actuator」のエンドポイントにアクセスできます。
 
-あるいは`application.properties`に
+あるいは\ ``application.properties``\ に
 
-.. code-block:: console properties
+.. code-block:: properties
 
-    management.security.enabled=false
+   management.security.enabled=false
 
 
 を設定する事で、「Spring Boot Actuator」に対する認可制御を無効にできます。
