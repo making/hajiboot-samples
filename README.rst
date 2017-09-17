@@ -158,9 +158,10 @@ Spring Boot 1.5から、「Spring Boot Actuator」のエンドポイントに対
 
 あるいは`application.properties`に
 
-``` properties
-management.security.enabled=false
-```
+.. code-block:: console properties
+
+    management.security.enabled=false
+
 
 を設定する事で、「Spring Boot Actuator」に対する認可制御を無効にできます。
 
