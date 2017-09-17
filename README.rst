@@ -22,6 +22,10 @@
      - 誤
      - 正
      - 訂正日
+   * - P.164
+     - ``application-cloud.proerties``
+     - ``application-cloud.properties``
+     - 2017-09-18
    * - P.176
      - ``spring.datasource.url:jdbc:h2:mem:customers;DB_CLOSE_ON_EXIT=FALSE``
      - ``spring.datasource.url:jdbc:log4jdbc:h2:mem:customers;DB_CLOSE_ON_EXIT=FALSE``
@@ -125,6 +129,10 @@
      - https://console.run.pivotal.io/2/
      - https://console.run.pivotal.io
      - 2016-11-07
+   * - P.164
+     - ``application-cloud.proerties``
+     - ``application-cloud.properties``
+     - 2017-09-18
    * - P.171
      - \-
      - [4.7]の前に「\ `Spring Cloud Connectorsのコネクションプールに関する設定 <https://github.com/making/hajiboot-samples/blob/master/README.rst#spring-cloud-connectorsのコネクションプールに関する設定>`_\ 」を追加
