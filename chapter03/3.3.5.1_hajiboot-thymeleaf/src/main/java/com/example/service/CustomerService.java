@@ -1,42 +1,46 @@
 package com.example.service;
 
-import com.example.domain.Customer;
-import com.example.repository.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.example.domain.Customer;
+import com.example.repository.CustomerRepository;
 
 @Service
 @Transactional
 public class CustomerService {
-    @Autowired
-    CustomerRepository customerRepository;
+	private final CustomerRepository customerRepository;
 
-    public List<Customer> findAll() {
-        return customerRepository.findAllOrderByName();
-    }
+	public CustomerService(CustomerRepository customerRepository) {
+		this.customerRepository = customerRepository;
+	}
 
-    public Page<Customer> findAll(Pageable pageable) {
-        return customerRepository.findAllOrderByName(pageable);
-    }
+	public List<Customer> findAll() {
+		return customerRepository.findAllOrderByName();
+	}
 
-    public Customer findOne(Integer id) {
-        return customerRepository.findOne(id);
-    }
+	public Page<Customer> findAll(Pageable pageable) {
+		return customerRepository.findAllOrderByName(pageable);
+	}
 
-    public Customer create(Customer customer) {
-        return customerRepository.save(customer);
-    }
+	public Optional<Customer> findOne(Integer id) {
+		return customerRepository.findById(id);
+	}
 
-    public Customer update(Customer customer) {
-        return customerRepository.save(customer);
-    }
+	public Customer create(Customer customer) {
+		return customerRepository.save(customer);
+	}
 
-    public void delete(Integer id) {
-        customerRepository.delete(id);
-    }
+	public Customer update(Customer customer) {
+		return customerRepository.save(customer);
+	}
+
+	public void delete(Integer id) {
+		customerRepository.deleteById(id);
+	}
 }
