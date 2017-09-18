@@ -22,6 +22,14 @@
      - 誤
      - 正
      - 訂正日
+   * - P.107 ``goToTop``\ メソッドの上のアノテーション
+     - ``@GetMapping(path = "edit", params = "goToTop")``
+     - ``@PostMapping(path = "edit", params = "goToTop")``
+     - 2017-09-19
+   * - P.111 ``goToTop``\ メソッドの上のアノテーション
+     - ``@RequestMapping(path = "edit", params = "goToTop")``
+     - ``@PostMapping(path = "edit", params = "goToTop")``
+     - 2017-09-19
    * - P.164
      - ``application-cloud.proerties``
      - ``application-cloud.properties``
@@ -93,6 +101,14 @@
      - ``@PostMapping(path = "edit", params = "form")``
      - ``@GetMapping(path = "edit", params = "form")``
      - 2016-11-07
+   * - P.107 ``goToTop``\ メソッドの上のアノテーション
+     - ``@GetMapping(path = "edit", params = "goToTop")``
+     - ``@PostMapping(path = "edit", params = "goToTop")``
+     - 2017-09-19
+   * - P.111 ``goToTop``\ メソッドの上のアノテーション
+     - ``@RequestMapping(path = "edit", params = "goToTop")``
+     - ``@PostMapping(path = "edit", params = "goToTop")``
+     - 2017-09-19
    * - P.124 (2か所)
      - application.yml
      - application.properties
