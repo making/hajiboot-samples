@@ -1,30 +1,37 @@
 package com.example.api;
 
-import com.example.domain.Customer;
-import com.example.service.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import com.example.domain.Customer;
+import com.example.service.CustomerService;
 
 @RestController
 @RequestMapping("api/customers")
 public class CustomerRestController {
-    @Autowired
-    CustomerService customerService;
+	private final CustomerService customerService;
 
-    @GetMapping
-    List<Customer> getCustomers() {
-        List<Customer> customers = customerService.findAll();
-        return customers;
-    }
+	public CustomerRestController(CustomerService customerService) {
+		this.customerService = customerService;
+	}
 
-    @GetMapping(path = "{id}")
-    Customer getCustomer(@PathVariable Integer id) {
-        Customer customer = customerService.findOne(id);
-        return customer;
-    }
+	@GetMapping
+	public List<Customer> getCustomers() {
+		List<Customer> customers = customerService.findAll();
+		return customers;
+	}
+
+	@GetMapping(path = "{id}")
+	public Customer getCustomer(@PathVariable Integer id) {
+		Customer customer = customerService.findOne(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+						"The given customer id is not found : " + id));
+		return customer;
+	}
 }
