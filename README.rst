@@ -45,6 +45,10 @@
      - ``@RequestMapping(path = "edit", params = "goToTop")``
      - ``@PostMapping(path = "edit", params = "goToTop")``
      - 2017-09-19
+   * - P.135, 136 アルゴリズム名
+     - ``PBKPF2``
+     - ``PBKDF2``
+     - 2018-04-23
    * - P.164
      - ``application-cloud.proerties``
      - ``application-cloud.properties``
@@ -152,6 +156,10 @@
      - ``src/main/resources/migration/V3__add_user.sql`` (2箇所)
      - ``src/main/resources/migration/V3__add-user.sql``
      - 2016-11-07
+   * - P.135, 136 アルゴリズム名
+     - ``PBKPF2``
+     - ``PBKDF2``
+     - 2018-04-23
    * - P.151
      - 2つ目の (1)
      - \(2\)
